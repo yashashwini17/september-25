@@ -1,0 +1,17 @@
+lass Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        def generate(ind, subset, ans, nums):
+            if ind == len(nums):
+                ans.append(subset.copy())
+                return
+            # Include nums[ind]
+            subset.append(nums[ind])
+            generate(ind + 1, subset, ans, nums)
+            subset.pop()
+            # Exclude nums[ind]
+            generate(ind + 1, subset, ans, nums)
+
+        subset = []
+        ans = []
+        generate(0, subset, ans, nums)
+        return ans
