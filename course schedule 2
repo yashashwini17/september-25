@@ -1,0 +1,26 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        adj = [] 
+        for _ in range(0,numCourses):
+            adj.append([]) 
+        for n,m in prerequisites:
+            adj[m].append(n) 
+        inDegre = [0]*numCourses 
+        for i in range(0,numCourses):
+            for j in adj[i]:
+                inDegre[j]+=1
+        q = deque([]) 
+        for i in range(0,numCourses):
+            if(inDegre[i] == 0):
+                q.append(i) 
+        ans = [] 
+        while(q):
+            node = q.popleft() 
+            ans.append(node) 
+            for i in adj[node]:
+                inDegre[i]-=1 
+                if(inDegre[i] == 0):
+                    q.append(i) 
+        if(len(ans) == numCourses):
+            return ans 
+        return []
