@@ -1,0 +1,29 @@
+def heapifyDown(arr,index):
+    smallest=index
+    lchild=2*index+1
+    rchild=2*index+2
+    if(lchild<len(arr) and arr[lchild]<arr[smallest]):
+        smallest=lchild
+    if(rchild<len(arr) and arr[rchild]<arr[smallest]):
+        smallest=rchild
+    if(index!=smallest):
+        arr[index],arr[smallest]=arr[smallest],arr[index]
+        heapifyDown(arr,smallest)
+def heapifyUp(arr,index):
+    if(index>0):
+        parent=(index-1)//2
+        if(arr[index]<arr[parent]):
+            arr[index],arr[parent]=arr[parent],arr[index]
+            heapifyUp(arr,parent)
+arr=[0,4,5,6,7,10,6,8]
+t=int(input("enter no of operations"))
+for _ in range(t):
+    index,val=map(int,input().split())
+    if(arr[index]>val):
+        arr[index]=val
+        heapifyUp(arr,index)
+    elif(arr[index]<val):
+        arr[index]=val
+        heapifyDown(arr,index)
+print(arr)
+
