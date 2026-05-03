@@ -1,0 +1,17 @@
+class Solution:
+    def convertMinToMaxHeap(self, N, arr):
+        def heapifyDown(arr,ind):
+            largest = ind 
+            lchild = 2*ind+1 
+            rchild = 2*ind+2 
+            if(lchild < N and arr[lchild]>arr[largest]):
+                largest = lchild 
+            if(rchild < N and arr[rchild]>arr[largest]):
+                largest = rchild 
+            if(largest!=ind):
+                arr[ind],arr[largest] = arr[largest],arr[ind] 
+                heapifyDown(arr,largest) 
+        # Code here
+        for ind in range(N//2-1,-1,-1):
+            heapifyDown(arr,ind)
+        return arr 
