@@ -1,0 +1,26 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        n=len(nums)
+        heap=[]
+        for ind in range(0,k):
+            heapq.heappush(heap,nums[ind])
+        for p in range(k,n):
+            if(nums[p]>heap[0]):
+                heapq.heappop(heap)
+                heapq.heappush(heap,nums[p])
+        return heap[0]
+#smallest
+import heapq
+class Solution:
+    def kthSmallest(self, arr, k):
+        n=len(arr)
+        heap=[]
+        for ind in range(0,k):
+            heapq.heappush(heap,-arr[ind])
+        for p in range(k,n):
+            if(arr[p]<-heap[0]):
+                heapq.heappop(heap)
+                heapq.heappush(heap,-arr[p])
+        return -heap[0]
+
+        
