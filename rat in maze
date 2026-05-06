@@ -1,0 +1,27 @@
+class Solution:
+    def ratInMaze(self, maze):
+        # code here
+        def generate(row,col,maze,directions,String,ans,n):
+            if(row==n-1 and col==n-1):
+                ans.append(String)
+                return
+            for r,c,d in directions:
+                nr=r+row
+                nc=c+col
+                if(nr>=0 and nr<n and nc>=0 and nc<n and maze[nr][nc]==1):
+                    maze[nr][nc]='.'
+                    generate(nr,nc,maze,directions,String+d,ans,n)
+                    maze[nr][nc]=1
+                    
+        # code here
+        n=len(maze)
+        directions=[[1,0,'D'],[0,-1,'L'],[0,1,'R'],[-1,0,'U']]
+        row,col=0,0
+        String=""
+        ans=[]
+        if maze[row][col]==0:
+            return []
+        maze[row][col]='.'
+        generate(row,col,maze,directions,String,ans,n)
+        maze[row][col] = 1
+        return ans
