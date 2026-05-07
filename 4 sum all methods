@@ -1,0 +1,60 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        '''s=set()
+        n=len(nums) #O(n**3)
+        for i in range(0,n):
+            for j in range(i+1,n):
+                for k in range(j+1,n):
+                    for l in range(k+1,n):
+                        if(nums[i]+nums[j]+nums[k]+nums[l]==target):
+                            lst=[nums[i],nums[j],nums[k],nums[l]]
+                            lst.sort()
+                            s.add(tuple(lst))
+        ans=[]
+        for t in s:
+            ans.append(list(t))
+        return ans'''
+        '''n=len(nums)#O(n**2)
+        s=set()
+        for a in range(0,n):
+            d={}
+            for b in range(a+1,n):
+                for c in range(b+1,n):
+                    e=target-(nums[a]+nums[b]+nums[c])
+                    if(e in d):
+                        lst=[nums[a],nums[b],nums[c],e]
+                        lst.sort()
+                        s.add(tuple(lst))
+                    d[nums[c]]=c
+        ans=[]
+        for t in s:
+            ans.append(list(t))
+        return ans'''
+        nums.sort()
+        ans=[]
+        n=len(nums)
+        for i in range(0,n):
+            if(i>0):
+                if(nums[i-1]==nums[i]):
+                    continue
+            for j in range(i+1,n):
+                if(j>i+1):
+                    if(nums[j-1]==nums[j]):
+                        continue
+                k=j+1
+                l=n-1
+                while(k<l):
+                    Sum=nums[i]+nums[j]+nums[k]+nums[l]
+                    if(Sum<target):
+                        k+=1
+                    elif(Sum>target):
+                        l-=1
+                    elif(Sum==target):
+                        ans.append([nums[i],nums[j],nums[k],nums[l]])
+                        k+=1
+                        while(k<l and nums[k-1]==nums[k]):
+                            k+=1
+                        l-=1
+                        while(k<l and nums[l+1]==nums[l]):
+                            l-=1
+        return ans
