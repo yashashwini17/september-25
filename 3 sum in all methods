@@ -1,0 +1,61 @@
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+         ''' s=set()
+        n=len(nums) #O(n**3)
+        for i in range(0,n):
+            for j in range(i+1,n):
+                for k in range(j+1,n):
+                    if(nums[i]+nums[j]+nums[k]==0):
+                        lst=[nums[i],nums[j],nums[k]]
+                        lst.sort()
+                        s.add(tuple(lst))
+        ans=[]
+        for t in s:
+            ans.append(list(t))
+        return ans'''
+        '''#hashing
+        n=len(nums)#O(n**2)
+        s=set()
+        for a in range(0,n):
+            d={}
+            for b in range(a+1,n):
+                c=-(nums[a]+nums[b])
+                if(c in d):
+                    lst=[nums[a],nums[b],c]
+                    lst.sort()
+                    s.add(tuple(lst))
+                d[nums[b]]=b
+        ans=[]
+        for t in s:
+            ans.append(list(t))
+        return ans'''
+        #optimal
+        nums.sort()
+        ans=[]
+        n=len(nums)
+        for i in range(0,n):
+            if(i>0):
+                if(nums[i-1]==nums[i]):
+                    continue
+            j=i+1
+            k=n-1
+            while(j<k):
+                Sum=nums[i]+nums[j]+nums[k]
+                if(Sum<0):
+                    j+=1
+                elif(Sum>0):
+                    k-=1
+                elif(Sum==0):
+                    ans.append([nums[i],nums[j],nums[k]])
+                    j+=1
+                    while(j<k and nums[j-1]==nums[j]):
+                        j+=1
+                    k-=1
+                    while(j<k and nums[k+1]==nums[k]):
+                        k-=1
+        return ans
+
+
+
+
+
